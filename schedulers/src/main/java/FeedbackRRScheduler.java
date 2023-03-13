@@ -1,3 +1,4 @@
+import java.util.PriorityQueue;
 import java.util.Properties;
 
 /**
@@ -8,6 +9,10 @@ import java.util.Properties;
 public class FeedbackRRScheduler extends AbstractScheduler {
 
   // TODO
+
+  public FeedbackRRScheduler() {
+    super();
+  }
 
   /**
    * Adds a process to the ready queue.

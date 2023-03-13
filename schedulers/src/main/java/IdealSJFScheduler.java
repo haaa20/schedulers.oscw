@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 /**
  * Ideal Shortest Job First Scheduler
  * 
@@ -11,7 +9,7 @@ public class IdealSJFScheduler extends AbstractScheduler {
 
 
   public IdealSJFScheduler() {
-
+    super();
   }
 
   /**
@@ -20,17 +18,17 @@ public class IdealSJFScheduler extends AbstractScheduler {
    * after having fully used its time quantum.
    */
   public void ready(Process process, boolean usedFullTimeQuantum) {
-    // We're gonna do priority at queueing as I think that's gonna be cheaper...
+    // We're going to do priority at queueing as I think that's going to be cheaper...
     int i = 0;
 
-    for (Process value : processQueue) {
+    for (Process value : ready) {
       if (value.getNextBurst() > process.getNextBurst()) {
         break;
       }
       i++;
     }
 
-    processQueue.add(i, process);
+    ready.add(i, process);
   }
 
   /**
@@ -40,8 +38,8 @@ public class IdealSJFScheduler extends AbstractScheduler {
    */
   public Process schedule() {
 
-    if (!processQueue.isEmpty()) {
-      return processQueue.poll();
+    if (!ready.isEmpty()) {
+      return ready.poll();
     }
 
     return null;

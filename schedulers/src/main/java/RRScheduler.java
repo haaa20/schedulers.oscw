@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Properties;
 
 /**
  * Round Robin Scheduler
@@ -7,11 +8,16 @@ import java.util.LinkedList;
  */
 public class RRScheduler extends AbstractScheduler {
 
-    // TODO
+    // The fields needed for the class to run properly
     int timeQuantum;
 
-    public RRScheduler(int timeQuantum) {
-        this.timeQuantum = timeQuantum;
+    public RRScheduler() {
+        super();
+    }
+
+    @Override
+    public void initialize(Properties parameters) {
+        this.timeQuantum = Integer.parseInt(parameters.getProperty("timeQuantum"));
     }
 
     /**
@@ -20,11 +26,14 @@ public class RRScheduler extends AbstractScheduler {
      * after having fully used its time quantum.
      */
     public void ready(Process process, boolean usedFullTimeQuantum) {
-        // Here's where I'm confused: usedFullTimeQuantum should be redundant, right?
-        // f0r RR scheduling it shouldn't matter... right...?
-        processQueue.add(process);
-        // I must be paranoid cos I'm thinking "THERE'S NO WAY IT'S THIS SIMPLE!!"
-
+        if (usedFullTimeQuantum) {
+            // If it's used it's time, to the back
+            ready.add(process);
+        }
+        else {
+            // ... otherwise to the front
+            ready.add(0, process);
+        }
     }
 
     /**
@@ -34,7 +43,7 @@ public class RRScheduler extends AbstractScheduler {
      */
     public Process schedule() {
         // The return method handles null checking for me... I think...
-        return processQueue.poll();
+        return ready.poll();
     }
 }
 

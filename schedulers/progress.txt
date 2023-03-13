@@ -1,0 +1,20 @@
+You can do it bro!!!
+
+NO MORE GIT IT'S EATING UP YOUR TIME TRYING TO GET IT TO WORK
+
+Round Robin Scheduler
+Ideal Shortest Job First Scheduler ✔
+Feedback RR Scheduler
+    - What priority are new tasks instanced with?
+SJF With Averaging
+
+The simulator calls the process model, which looks like it does most of the heavy lifting...
+
+The process model gets a queue of events from an event processor, which it then passes to whichever scheduler it has been
+instanced with as it is run
+    - What is the difference between a cpu burst and an io burst?
+    - WHERE TO WE WRITE OUR EXPERIMENTS!?!?!
+
+I FOUND IT I FOUND THE BIG "WHILE" LOOP!: EventProcessor.java line 61
+
+The abstract scheduler will instance progressQueue in its constructor, each subclass will have to call super()

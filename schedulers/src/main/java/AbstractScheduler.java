@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.Properties;
-import java.util.Queue;
 
 /**
  * AbstractScheduler
@@ -10,14 +9,16 @@ import java.util.Queue;
  */
 public abstract class AbstractScheduler {
 
-    protected LinkedList<Process> processQueue;
+    protected LinkedList<Process> ready;
+
+    public AbstractScheduler() {
+        this.ready = new LinkedList<>();
+    }
 
     /**
      * Initializes the scheduler from the given parameters
      */
-    public void initialize(Properties parameters) {
-        processQueue = new LinkedList<>();
-    }
+    public void initialize(Properties parameters) {}
 
     /**
      * Adds a process to the ready queue.
